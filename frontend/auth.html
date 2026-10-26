@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account | BellyBoss</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}body{min-height:100vh;margin:0;font-family:Arial,Helvetica,sans-serif;color:white;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.65)),url('foodimage.png') center/cover fixed}.navbar{padding:20px 40px}.navbar-brand,.nav-link{color:white!important}.nav-link:hover{color:#ff9800!important}.account-wrap{min-height:75vh;display:grid;place-items:center;padding:30px}.account-card{width:min(100%,480px);padding:36px;background:rgba(255,255,255,.12);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.2);border-radius:20px;box-shadow:0 10px 30px #0005}.account-card h1{font-weight:800}.form-control{padding:12px;background:rgba(255,255,255,.15);border:1px solid #ffffff30;color:white}.form-control::placeholder{color:#ddd}.form-control:focus{background:rgba(255,255,255,.2);color:white;border-color:#ff9800;box-shadow:none}.btn-warning{background:#ff9800;border:0;font-weight:bold}.switch{color:#ffbd58;cursor:pointer;text-decoration:underline}.footer{padding:24px;text-align:center;background:#111;color:#aaa}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark"><div class="container-fluid"><a class="navbar-brand fw-bold fs-3" href="index.html">BellyBoss</a><div class="navbar-nav ms-auto"><a class="nav-link" href="pricing.html">Menu</a><a class="nav-link" href="cart.html">Cart</a></div></div></nav>
+  <main class="account-wrap"><section class="account-card"><h1 id="form-title" class="mb-2">Welcome back</h1><p class="text-light mb-4">Log in to save your cart and place your order.</p><div id="account-message" class="alert" hidden></div>
+    <form id="account-form" novalidate><div id="name-field" class="mb-3" hidden><label class="form-label" for="name">Name</label><input class="form-control" id="name" name="name" autocomplete="name" maxlength="80"></div><div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control" id="email" name="email" type="email" autocomplete="email" required></div><div class="mb-4"><label class="form-label" for="password">Password</label><input class="form-control" id="password" name="password" type="password" minlength="8" autocomplete="current-password" required></div><button id="submit-button" class="btn btn-warning w-100 py-3">Log in</button></form>
+    <p class="text-center mt-4 mb-0"><span id="switch-copy">New to BellyBoss?</span> <a id="switch-mode" class="switch">Create an account</a></p>
+  </section></main><footer class="footer">© 2026 BellyBoss · Fresh Food · Fast Delivery</footer>
+  <script src="api.js"></script><script>
+    const form=document.getElementById('account-form'), message=document.getElementById('account-message'), nameField=document.getElementById('name-field'), title=document.getElementById('form-title'), button=document.getElementById('submit-button'), toggle=document.getElementById('switch-mode');
+    let registering=new URLSearchParams(location.search).get('mode')==='register';
+    function renderMode(){nameField.hidden=!registering;document.getElementById('name').required=registering;title.textContent=registering?'Create your account':'Welcome back';button.textContent=registering?'Create account':'Log in';toggle.textContent=registering?'Log in':'Create an account';document.getElementById('switch-copy').textContent=registering?'Already have an account?':'New to BellyBoss?';document.getElementById('password').autocomplete=registering?'new-password':'current-password';}
+    toggle.onclick=()=>{registering=!registering;renderMode();message.hidden=true;};
+    form.onsubmit=async event=>{event.preventDefault();if(!form.reportValidity())return;button.disabled=true;button.textContent='Please wait...';try{const values=Object.fromEntries(new FormData(form));const data=await API.request(`/auth/${registering?'register':'login'}`,{method:'POST',body:JSON.stringify(values)});sessionStorage.setItem('bellybossToken',data.token);const next=new URLSearchParams(location.search).get('next');location.href=next==='cart.html'?'cart.html':'pricing.html';}catch(error){API.showMessage(message,error.message);}finally{button.disabled=false;button.textContent=registering?'Create account':'Log in';}};
+    renderMode();
+  </script>
+</body>
+</html>

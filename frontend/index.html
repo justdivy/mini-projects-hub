@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BellyBoss</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .hero {
+            width: 100%;
+            min-height: 110vh;
+            /* instead of 100vh */
+            background: linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)),
+                url("foodimage.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .navbar {
+            background: transparent !important;
+            padding: 20px 40px;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-size: 18px;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ff9800 !important;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 600px;
+            margin-top: 130px;
+            margin-left: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 70px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: #ddd;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons .btn {
+            border-radius: 50px;
+            padding: 12px 35px;
+            font-size: 18px;
+            transition: .3s;
+        }
+
+        .btn-warning {
+            background: #ff9800;
+            border: none;
+        }
+
+        .btn-warning:hover {
+            background: #ff7700;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline-light:hover {
+            color: black;
+        }
+
+        .footer {
+            background: #111;
+            padding: 70px 0 25px;
+            color: white;
+            border-top: 2px solid rgba(255, 152, 0, .3);
+        }
+
+        .footer-logo {
+            font-size: 45px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: #ff9800;
+        }
+
+        .footer h5 {
+            color: #ff9800;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer p,
+        .footer a {
+            color: #bdbdbd;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            transition: .3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff9800;
+            padding-left: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: #222;
+            color: white;
+            font-size: 22px;
+            transition: .3s;
+        }
+
+        .social-icons a:hover {
+            background: #ff9800;
+            transform: translateY(-5px);
+        }
+
+        .footer hr {
+            border-color: #333;
+            margin: 35px 0 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #888;
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            background: #1f1f1f;
+
+            color: #fff;
+            font-size: 22px;
+
+            transition: .35s;
+        }
+
+        .social-icons a:hover {
+            background: #ff9800;
+            transform: translateY(-6px) scale(1.08);
+            box-shadow: 0 0 20px rgba(255, 152, 0, .5);
+        }
+
+        .footer-links a {
+            display: inline-block;
+            color: #bbb;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: .3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff9800;
+            transform: translateX(8px);
+        }
+
+
+        @media(max-width:768px) {
+
+            .hero-title h1 {
+
+                font-size: 42px;
+
+            }
+
+            .hero-title p {
+
+                font-size: 18px;
+
+            }
+
+            .navbar-brand {
+
+                font-size: 30px;
+
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <h3>BellyBoss</h3>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/features.html">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pricing.html">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="auth.html">Log in</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container hero-content">
+            <h1>Fresh Food,<br>Delivered Fast.</h1>
+            <p>
+                Craving something delicious? Order from your favourite restaurants
+                and enjoy hot, fresh meals delivered right to your doorstep.
+            </p>
+            <div class="hero-buttons">
+                <a href="pricing.html" class="btn btn-warning btn-lg px-4 me-3">
+                    🍔 Order Now
+                </a>
+                <a href="features.html" class="btn btn-outline-light btn-lg px-4">
+                    Explore Menu
+                </a>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h2 class="footer-logo">
+                        🍔 Belly<span>Boss</span>
+                    </h2>
+                    <p>
+                        Bringing delicious meals from your favorite restaurants
+                        straight to your doorstep with speed and care.
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Menu</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5>Contact</h5>
+                    <p>📍 Chandigarh, India</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉ support@bellyboss.com</p>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">
+                © 2026 BellyBoss | Fresh Food • Fast Delivery • Made with ❤️
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

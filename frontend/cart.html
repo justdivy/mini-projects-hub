@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BellyBoss | Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background:
+                linear-gradient(rgba(0, 0, 0, .45), rgba(0, 0, 0, .45)),
+                url("foodimage.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+        /* Navbar */
+        .navbar {
+            background: transparent !important;
+            padding: 20px 40px;
+        }
+        .navbar-brand {
+            font-size: 35px;
+            font-weight: bold;
+            color: white !important;
+        }
+        .nav-link {
+            color: white !important;
+            margin-left: 20px;
+            font-size: 18px;
+        }
+        .nav-link:hover {
+            color: #ff9800 !important;
+        }
+        /* Heading */
+        .heading {
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+        .heading h1 {
+            font-size: 60px;
+            font-weight: 700;
+        }
+        .heading p {
+            font-size: 20px;
+            color: #ddd;
+        }
+        /* Main Layout */
+        .cart-container {
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding-bottom: 60px;
+        }
+        /* Glass Card */
+        .glass {
+            background: rgba(255, 255, 255, .08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, .15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .4);
+        }
+        .cart-item {
+            padding: 20px 0;
+        }
+        .food-img {
+            width: 120px;
+            height: 90px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+        .price {
+            color: #ff9800;
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .qty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 20px;
+        }
+        .qty button {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            background: #ff9800;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+        .qty button:hover {
+            background: #ff7700;
+        }
+        .qty span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .remove-btn {
+            border: none;
+            background: #dc3545;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            transition: .3s;
+        }
+        .remove-btn:hover {
+            background: #bb2d3b;
+            transform: scale(1.08);
+        }
+        hr {
+            border-color: rgba(255, 255, 255, .15);
+        }
+        .form-control {
+            background: rgba(255, 255, 255, .12);
+            border: none;
+            color: white;
+            padding: 12px;
+        }
+        .form-control::placeholder {
+            color: #ddd;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, .18);
+            color: white;
+            box-shadow: none;
+            border: 1px solid #ff9800;
+        }
+        .form-check {
+            margin-bottom: 12px;
+        }
+        .form-check-label {
+            font-size: 18px;
+        }
+        .btn-warning {
+            background: #ff9800;
+            border: none;
+            font-weight: bold;
+            padding: 14px;
+            transition: .3s;
+        }
+        .btn-warning:hover {
+            background: #ff7700;
+            transform: translateY(-2px);
+        }
+        /* ================= FOOTER ================= */
+        .footer {
+            background: #111;
+            padding: 70px 0 25px;
+            margin-top: 80px;
+            color: white;
+        }
+        .footer-logo {
+            font-size: 42px;
+            font-weight: 700;
+        }
+        .footer-logo span {
+            color: #ff9800;
+        }
+        .footer h5 {
+            color: #ff9800;
+            margin-bottom: 20px;
+        }
+        .footer p {
+            color: #bdbdbd;
+            line-height: 1.8;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            text-decoration: none;
+            color: #bdbdbd;
+            transition: .3s;
+        }
+        .footer-links a:hover {
+            color: #ff9800;
+            padding-left: 8px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #222;
+            color: white;
+            font-size: 20px;
+            transition: .3s;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            background: #ff9800;
+            transform: translateY(-5px);
+        }
+        .footer hr {
+            border-color: #444;
+            margin: 30px 0;
+        }
+        .copyright {
+            text-align: center;
+            color: #888;
+            margin: 0;
+        }
+        /* ================= MOBILE ================= */
+        @media(max-width:992px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+            .food-img {
+                width: 90px;
+                height: 70px;
+            }
+            .cart-item {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .price {
+                width: auto;
+            }
+            .heading h1 {
+                font-size: 45px;
+            }
+        }
+        @media(max-width:576px) {
+            .heading {
+                padding-top: 100px;
+            }
+            .heading h1 {
+                font-size: 34px;
+            }
+            .heading p {
+                font-size: 16px;
+            }
+            .navbar-brand {
+                font-size: 28px;
+            }
+            .qty {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                🍔 BellyBoss
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="features.html">
+                            Features
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">
+                            Pricing
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="cart.html">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="auth.html" data-auth-link>Log in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="heading">
+        <h1>🛒 Your Cart</h1>
+        <p>
+            Review your order and proceed to checkout.
+        </p>
+    </div>
+    <div class="cart-container">
+        <div class="glass">
+            <div id="cart-items">Loading your cart...</div>
+        </div>
+        <!-- ================= RIGHT SIDE ================= -->
+        <div class="glass">
+            <h2 class="mb-4">&#129534; Order Summary</h2>
+            <div class="d-flex justify-content-between mb-3"><span>Subtotal</span><span id="subtotal">&#8377;0.00</span></div>
+            <div class="d-flex justify-content-between mb-3"><span>Delivery</span><span id="delivery">&#8377;49.99</span></div>
+            <div class="d-flex justify-content-between mb-3"><span>GST (5%)</span><span id="tax">&#8377;0.00</span></div>
+            <hr><div class="d-flex justify-content-between mb-4"><h4>Total</h4><h4 id="total" style="color:#ff9800;">&#8377;0.00</h4></div>
+            <div id="cart-message" class="alert" hidden></div>
+            <hr><h3 class="mb-4">&#128100; Delivery Details</h3>
+            <form id="checkout-form">
+                <div class="mb-3"><input required name="name" type="text" class="form-control" placeholder="Full Name" maxlength="80"></div>
+                <div class="mb-3"><input required name="email" type="email" class="form-control" placeholder="Email Address"></div>
+                <div class="mb-3"><input required name="phone" type="tel" pattern="[0-9+()\- ]{7,18}" class="form-control" placeholder="Phone Number"></div>
+                <div class="mb-3"><textarea required name="address" rows="3" class="form-control" placeholder="Delivery Address" maxlength="250"></textarea></div>
+                <div class="row"><div class="col-md-6 mb-3"><input required name="city" type="text" class="form-control" placeholder="City"></div><div class="col-md-6 mb-3"><input required name="pincode" type="text" pattern="[0-9]{6}" maxlength="6" class="form-control" placeholder="6-digit Pincode"></div></div>
+                <hr class="my-4"><h4>&#128179; Payment Method</h4>
+                <div class="form-check"><input class="form-check-input" type="radio" value="Cash on Delivery" checked name="paymentMethod"><label class="form-check-label">Cash on Delivery</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" value="UPI" name="paymentMethod"><label class="form-check-label">UPI</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" value="Credit / Debit Card" name="paymentMethod"><label class="form-check-label">Credit / Debit Card</label></div>
+                <div class="form-check mb-4"><input class="form-check-input" type="radio" value="Net Banking" name="paymentMethod"><label class="form-check-label">Net Banking</label></div>
+                <button id="checkout-button" class="btn btn-warning w-100 btn-lg">Confirm Order</button>
+            </form>
+        </div>
+    </div>
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h2 class="footer-logo">
+                        🍔 Belly<span>Boss</span>
+                    </h2>
+                    <p>
+                        Bringing delicious meals from your favorite restaurants
+                        straight to your doorstep with speed and care.
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Menu</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5>Contact</h5>
+                    <p>📍 Chandigarh, India</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉ support@bellyboss.com</p>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">
+                © 2026 BellyBoss | Fresh Food • Fast Delivery • Made with ❤️
+            </p>
+        </div>
+    </footer>
+    <script src="api.js"></script>
+    <script>
+      const itemsNode = document.getElementById('cart-items');
+      const messageNode = document.getElementById('cart-message');
+      const authLink = document.querySelector('[data-auth-link]');
+      if (!API.token()) location.replace('auth.html?next=cart.html');
+      if (API.token()) { authLink.textContent = 'Log out'; authLink.href = '#'; authLink.onclick = event => { event.preventDefault(); sessionStorage.removeItem('bellybossToken'); location.href = 'index.html'; }; }
+      const escapeHTML = value => String(value).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+      function renderCart(cart) {
+        const items = cart.items.filter(line => line.product);
+        if (!items.length) itemsNode.innerHTML = '<p>Your cart is empty. <a href="pricing.html">Explore the menu</a> to add something delicious.</p>';
+        else itemsNode.innerHTML = items.map(line => `<div class="cart-item d-flex align-items-center mb-4"><img src="${encodeURIComponent(line.product.image)}" alt="${escapeHTML(line.product.name)}" class="food-img"><div class="ms-4 flex-grow-1"><h4>${escapeHTML(line.product.name)}</h4><p>${escapeHTML(line.product.description)}</p></div><h5 class="price">${API.money(line.product.price)}</h5><div class="qty"><button type="button" data-change="-1" data-id="${line.product._id}" aria-label="Decrease quantity">-</button><span>${line.quantity}</span><button type="button" data-change="1" data-id="${line.product._id}" aria-label="Increase quantity">+</button></div><button type="button" class="remove-btn" data-remove="${line.product._id}" aria-label="Remove ${escapeHTML(line.product.name)}"><i class="bi bi-trash"></i></button></div><hr>`).join('');
+        itemsNode.querySelectorAll('[data-change]').forEach(button => button.onclick = async () => { const line = items.find(item => item.product._id === button.dataset.id); const quantity = line.quantity + Number(button.dataset.change); if (quantity < 1) return removeItem(button.dataset.id); await updateItem(button.dataset.id, quantity); });
+        itemsNode.querySelectorAll('[data-remove]').forEach(button => button.onclick = () => removeItem(button.dataset.remove));
+        const subtotal = items.reduce((sum, line) => sum + line.product.price * line.quantity, 0); const delivery = items.length ? 49.99 : 0; const tax = subtotal * .05;
+        document.getElementById('subtotal').textContent = API.money(subtotal); document.getElementById('delivery').textContent = API.money(delivery); document.getElementById('tax').textContent = API.money(tax); document.getElementById('total').textContent = API.money(subtotal + delivery + tax);
+      }
+      async function loadCart() { if (!API.token()) return; try { const {cart} = await API.request('/cart'); renderCart(cart); } catch(error) { if (!API.token()) location.replace('auth.html?next=cart.html'); else API.showMessage(messageNode,error.message); } }
+      async function updateItem(id, quantity) { try { const {cart}=await API.request(`/cart/${id}`,{method:'PATCH',body:JSON.stringify({quantity})}); renderCart(cart); } catch(error) { API.showMessage(messageNode,error.message); } }
+      async function removeItem(id) { try { const {cart}=await API.request(`/cart/${id}`,{method:'DELETE'}); renderCart(cart); } catch(error) { API.showMessage(messageNode,error.message); } }
+      document.getElementById('checkout-form').addEventListener('submit', async event => { event.preventDefault(); const form=event.currentTarget; if (!form.reportValidity()) return; const button=document.getElementById('checkout-button'); button.disabled=true; button.textContent='Placing order...';
+        try { const values=Object.fromEntries(new FormData(form)); const {message,order}=await API.request('/orders',{method:'POST',body:JSON.stringify({deliveryDetails:{name:values.name,email:values.email,phone:values.phone,address:values.address,city:values.city,pincode:values.pincode},paymentMethod:values.paymentMethod})}); API.showMessage(messageNode,`${message} Order total: ${API.money(order.total)}.`, 'success'); form.reset(); await loadCart(); }
+        catch(error) { API.showMessage(messageNode,error.message); } finally { button.disabled=false; button.textContent='Confirm Order'; }
+      });
+      loadCart();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
